@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { Map, Marker } from "pigeon-maps";
+import { stamenToner } from 'pigeon-maps/providers';
+
+import locations from "./locations";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <Map 
+      height={800} 
+      width={800} 
+      provider={stamenToner}
+      defaultCenter={[39.0997, -94.5786]} 
+      defaultZoom={10}
+    >
+      {locations.map((loc, key) => (
+        <Marker
+          key={key}
+          width={5}
+          anchor={[loc.lon, loc.lat]} 
+        />
+      ))}
+      
+    </Map>
+  )
+};
 
 export default App;
